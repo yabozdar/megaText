@@ -1,2 +1,3 @@
 # megaText
-A simple text editor to write nofty notes.
+
+A simple text editor to write nifty notes.
