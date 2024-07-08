@@ -17,8 +17,12 @@ void enableRawMode() {
   // We use atexit() to register disable RawMode function.
   atexit(disableRawMode);
   struct termios raw = orig_termios;
+  // IXON turns off ctrl-s and ctrl-q commands to terminal.
+  // ICRNL fixes ctrl-m and carraige return issues
+  raw.c_iflag &= ~(ICRNL | IXON);
   // ICANON turns off canonical mode.
-  raw.c_lflag &= ~(ECHO | ICANON | ISIG);
+  // ISIG turns off ctrl-c and ctrl-z commands to terminal.
+  raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
 
   tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
 
