@@ -20,6 +20,8 @@ void enableRawMode() {
   // IXON turns off ctrl-s and ctrl-q commands to terminal.
   // ICRNL fixes ctrl-m and carraige return issues
   raw.c_iflag &= ~(ICRNL | IXON);
+  // OPOST turns off all output processing
+  raw.c_iflag &= ~(OPOST);
   // ICANON turns off canonical mode.
   // ISIG turns off ctrl-c and ctrl-z commands to terminal.
   raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
